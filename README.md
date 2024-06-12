@@ -1,8 +1,9 @@
-# Chainfile Hardhat
+# Chainfile Bitcoin
 
-Part of the [Chainfile](https://chainfile.org) ecosystem,
-this library provides a Docker image for running Hardhat in a container for toolchain isolation.
-This is particularly useful for language-agnostic development and parallelization of systems.
+Part of the [Chainfile](https://chainfile.org) ecosystem.
+
+- [ ] Add testnet.json
+- [ ] Add signet.json
 
 ## License
 
