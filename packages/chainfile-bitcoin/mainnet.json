@@ -1,0 +1,87 @@
+{
+  "$schema": "../node_modules/@chainfile/schema/schema.json",
+  "caip2": "bip122:000000000019d6689c085ae165831e93",
+  "name": "Bitcoin Mainnet",
+  "values": {
+    "rpc_user": {
+      "random": {
+        "type": "bytes",
+        "length": 16,
+        "encoding": "hex"
+      }
+    },
+    "rpc_password": {
+      "random": {
+        "type": "bytes",
+        "length": 16,
+        "encoding": "hex"
+      }
+    }
+  },
+  "containers": {
+    "bitcoind": {
+      "image": "docker.io/kylemanna/bitcoind",
+      "tag": "latest",
+      "source": "https://github.com/kylemanna/docker-bitcoind",
+      "endpoints": {
+        "p2p": {
+          "port": 8333
+        },
+        "rpc": {
+          "port": 8332,
+          "protocol": "HTTP JSON-RPC 2.0",
+          "authorization": {
+            "type": "HttpBasic",
+            "username": {
+              "$value": "rpc_user"
+            },
+            "password": {
+              "$value": "rpc_password"
+            }
+          },
+          "probes": {
+            "readiness": {
+              "method": "getblockchaininfo",
+              "params": [],
+              "match": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "blocks": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["blocks"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "resources": {
+        "cpu": 1,
+        "memory": 2048
+      },
+      "environment": {
+        "DISABLEWALLET": "1",
+        "RPCUSER": {
+          "$value": "rpc_user"
+        },
+        "RPCPASSWORD": {
+          "$value": "rpc_password"
+        }
+      },
+      "volumes": {
+        "persistent": {
+          "paths": ["/bitcoin/.bitcoin"],
+          "size": {
+            "initial": "600G",
+            "from": "2024-01-01",
+            "growth": "20G",
+            "rate": "monthly"
+          }
+        }
+      }
+    }
+  }
+}
