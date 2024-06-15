@@ -1,20 +1,24 @@
 {
-  "$schema": "../node_modules/@chainfile/schema/schema.json",
+  "$schema": "https://chainfile.org/schema.json?v=6",
   "caip2": "bip122:000000000019d6689c085ae165831e93",
   "name": "Bitcoin Mainnet",
   "values": {
     "rpc_user": {
-      "random": {
-        "type": "bytes",
-        "length": 16,
-        "encoding": "hex"
+      "description": "Username for Basic HTTP authentication to the RPC server.",
+      "default": {
+        "random": {
+          "bytes": 16,
+          "encoding": "hex"
+        }
       }
     },
     "rpc_password": {
-      "random": {
-        "type": "bytes",
-        "length": 16,
-        "encoding": "hex"
+      "description": "Password for Basic HTTP authentication to the RPC server.",
+      "default": {
+        "random": {
+          "bytes": 16,
+          "encoding": "hex"
+        }
       }
     }
   },
@@ -51,7 +55,9 @@
                       "type": "number"
                     }
                   },
-                  "required": ["blocks"]
+                  "required": [
+                    "blocks"
+                  ]
                 }
               }
             }
@@ -73,7 +79,9 @@
       },
       "volumes": {
         "persistent": {
-          "paths": ["/bitcoin/.bitcoin"],
+          "paths": [
+            "/bitcoin/.bitcoin"
+          ],
           "size": {
             "initial": "600G",
             "from": "2024-01-01",

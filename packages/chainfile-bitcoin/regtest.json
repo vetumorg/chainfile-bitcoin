@@ -3,15 +3,26 @@
   "caip2": "bip122:0f9188f13cb7b2c71f2a335e3a4fc328",
   "name": "Bitcoin Regtest",
   "values": {
-    "rpc_user": "user",
-    "rpc_password": "pass"
+    "rpc_user": {
+      "description": "Username for Basic HTTP authentication to the RPC server.",
+      "default": "user"
+    },
+    "rpc_password": {
+      "description": "Password for Basic HTTP authentication to the RPC server.",
+      "default": "pass"
+    }
   },
   "containers": {
     "bitcoind": {
       "image": "docker.io/kylemanna/bitcoind",
       "tag": "latest",
       "source": "https://github.com/kylemanna/docker-bitcoind",
-      "command": ["btc_oneshot", "-fallbackfee=0.00000200", "-rpcbind=:8332", "-rpcallowip=0.0.0.0/0"],
+      "command": [
+        "btc_oneshot",
+        "-fallbackfee=0.00000200",
+        "-rpcbind=:8332",
+        "-rpcallowip=0.0.0.0/0"
+      ],
       "endpoints": {
         "p2p": {
           "port": 18445
@@ -40,7 +51,9 @@
                       "type": "number"
                     }
                   },
-                  "required": ["blocks"]
+                  "required": [
+                    "blocks"
+                  ]
                 }
               }
             }
@@ -63,7 +76,9 @@
       },
       "volumes": {
         "persistent": {
-          "paths": ["/bitcoin/.bitcoin"],
+          "paths": [
+            "/bitcoin/.bitcoin"
+          ],
           "size": "250M"
         }
       }
