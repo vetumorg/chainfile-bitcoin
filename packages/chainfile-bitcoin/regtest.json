@@ -17,12 +17,7 @@
       "image": "docker.io/kylemanna/bitcoind",
       "tag": "latest",
       "source": "https://github.com/kylemanna/docker-bitcoind",
-      "command": [
-        "btc_oneshot",
-        "-fallbackfee=0.00000200",
-        "-rpcbind=:8332",
-        "-rpcallowip=0.0.0.0/0"
-      ],
+      "command": ["btc_oneshot", "-fallbackfee=0.00000200", "-rpcbind=:8332", "-rpcallowip=0.0.0.0/0"],
       "endpoints": {
         "p2p": {
           "port": 18445
@@ -51,9 +46,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "blocks"
-                  ]
+                  "required": ["blocks"]
                 }
               }
             }
@@ -76,9 +69,7 @@
       },
       "volumes": {
         "persistent": {
-          "paths": [
-            "/bitcoin/.bitcoin"
-          ],
+          "paths": ["/bitcoin/.bitcoin"],
           "size": "250M"
         }
       }

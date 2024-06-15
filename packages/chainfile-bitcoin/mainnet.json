@@ -57,9 +57,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "blocks"
-                  ]
+                  "required": ["blocks"]
                 }
               }
             }
@@ -81,9 +79,7 @@
       },
       "volumes": {
         "persistent": {
-          "paths": [
-            "/bitcoin/.bitcoin"
-          ],
+          "paths": ["/bitcoin/.bitcoin"],
           "size": {
             "initial": "600G",
             "from": "2024-01-01",

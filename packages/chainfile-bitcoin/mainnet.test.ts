@@ -1,8 +1,8 @@
+import { ChainfileContainer, ChainfileTestcontainers } from '@chainfile/testcontainers';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 import waitForExpect from 'wait-for-expect';
 
 import mainnet from './mainnet.json';
-import { ChainfileContainer, ChainfileTestcontainers } from '@chainfile/testcontainers';
 
 const testcontainers = new ChainfileTestcontainers(mainnet);
 
