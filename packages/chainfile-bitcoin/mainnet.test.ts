@@ -1,10 +1,10 @@
-import { ChainfileContainer, ChainfileTestcontainers } from '@chainfile/testcontainers';
-import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
-import waitForExpect from 'wait-for-expect';
+import { CFContainer, CFTestcontainers } from '@chainfile/testcontainers';
+import { afterAll, beforeAll, describe, expect, it } from '@workspace/jest/globals';
+import waitFor from '@workspace/jest/wait-for';
 
 import mainnet from './mainnet.json';
 
-const testcontainers = new ChainfileTestcontainers(mainnet);
+const testcontainers = new CFTestcontainers(mainnet);
 
 beforeAll(async () => {
   await testcontainers.start();
@@ -15,7 +15,7 @@ afterAll(async () => {
 });
 
 describe('bitcoind', () => {
-  let bitcoind: ChainfileContainer;
+  let bitcoind: CFContainer;
 
   beforeAll(() => {
     bitcoind = testcontainers.get('bitcoind');
@@ -114,7 +114,7 @@ describe('bitcoind', () => {
   describe.skip('synchronization', () => {
     // Takes too long to run and is not deterministic
     beforeAll(async () => {
-      await waitForExpect(async () => {
+      await waitFor(async () => {
         const response = await bitcoind.rpc({
           method: 'getblockcount',
           params: [],
